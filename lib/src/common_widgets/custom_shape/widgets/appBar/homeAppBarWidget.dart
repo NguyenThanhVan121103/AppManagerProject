@@ -1,5 +1,7 @@
 import 'package:appmanager/src/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
+import 'package:appmanager/src/features/screen/views/setting_page/widget/setting_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 import '../../../../constants/constColor.dart';
@@ -38,7 +40,7 @@ class HomePageAppBar extends StatelessWidget {
               Iconsax.setting,
               color: Colors.white,
             ),
-            onPressed: (){})
+            onPressed: ()=> Get.to(const SettingPageView()))
       ],
     );
   }

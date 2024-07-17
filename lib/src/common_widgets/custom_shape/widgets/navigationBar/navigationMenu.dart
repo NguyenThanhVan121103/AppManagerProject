@@ -1,11 +1,16 @@
 import 'package:appmanager/src/features/screen/views/home/widget/home_page.dart';
+import 'package:appmanager/src/features/screen/views/news/widget/news_page.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:get/get.dart';
 
 class navigationMenu extends StatelessWidget {
-  navigationMenu({super.key});
+  navigationMenu({
+    super.key,
+    this.newIndex = 0,
+  });
   final controller = NavigationControlelr();
+  final int newIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,9 @@ class navigationMenu extends StatelessWidget {
           height: 60,
           elevation: 0,
           selectedIndex: controller.SelectedIndex.value, //Listening Value
-          onDestinationSelected: (index) => controller.SelectedIndex.value = index,
+            onDestinationSelected: (index) => {
+            if (newIndex == 0) controller.SelectedIndex.value = index : index = newIndex  ,
+            },
           destinations: const[
             NavigationDestination(icon: Icon(Iconsax.home), label: "Home"),
             NavigationDestination(icon: Icon(Iconsax.notification), label: "Notificaion"),
@@ -34,7 +41,7 @@ class NavigationControlelr extends GetxController {
 
   final screems = [
     const homePageView(),
-    Container(color: Colors.red),
+    const newsPageView(),
     Container(color: Colors.yellow),
     Container(color: Colors.green)];
 

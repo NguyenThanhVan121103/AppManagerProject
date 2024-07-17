@@ -23,7 +23,7 @@ class title_buttonWidget extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(style: TextStyle(color: colorTitle, fontSize: 20), title,),
+            Text(style: TextStyle(color: colorTitle, fontSize: 23, fontWeight: FontWeight.bold), title,),
             if(showViewAllButton) textButtonWidget(title: titleButton, colorTitle: colorTitle)
           ],
         )

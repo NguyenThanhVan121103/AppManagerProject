@@ -10,7 +10,9 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.showBackArrows = false,
     this.lendingIcon,
     this.lendingOnPressed,
-    this.action
+    this.action,
+    this.colorIcon,
+    this.backOnTap,
   });
 
   final Widget? title;
@@ -18,6 +20,8 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
   final IconData? lendingIcon;
   final List<Widget>? action;
   final VoidCallback? lendingOnPressed;
+  final Color? colorIcon;
+  final Widget? backOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +32,8 @@ class MAppBar extends StatelessWidget implements PreferredSizeWidget {
         // I want custom appbar
         automaticallyImplyLeading: false,
         leading: showBackArrows
-            ? IconButton(onPressed: () => Get.back(), icon: const Icon(Iconsax.arrow_left, color: MColor.third,))
-        : lendingIcon != null ? IconButton(onPressed: (){}, icon: Icon(lendingIcon)) : null,
+            ? IconButton(onPressed: () => Get.back(), icon:  Icon(Iconsax.arrow_left, color:colorIcon,))
+        : lendingIcon != null ? IconButton(onPressed: (){}, icon: Icon(lendingIcon, color: colorIcon,)) : null,
       title: title,
         actions: action
       )

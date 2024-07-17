@@ -41,6 +41,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   iconsax: ^0.0.8
   get: ^4.6.6
+  carousel_slider: ^4.2.1
 
 
 dev_dependencies:

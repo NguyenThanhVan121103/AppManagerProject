@@ -1,9 +1,10 @@
-import 'package:appmanager/src/common_widgets/custom_shape/widgets/navigationBarWidget/navigationMenu.dart';
+import 'package:appmanager/src/common_widgets/custom_shape/widgets/navigationBar/navigationMenu.dart';
 import 'package:appmanager/src/features/screen/views/home/widget/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 void main() {
   runApp( const MaterialRun());
@@ -45,7 +46,7 @@ class MaterialRun extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
           home: navigationMenu(),
         );
   }
