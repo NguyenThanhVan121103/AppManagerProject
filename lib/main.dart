@@ -1,5 +1,5 @@
-import 'package:appmanager/src/common_widgets/custom_shape/widgets/navigationBar/navigationMenu.dart';
-import 'package:appmanager/src/features/screen/views/home/widget/home_page.dart';
+import 'package:appmanager/common_widgets/custom_shape/widgets/navigationBar/navigationMenu.dart';
+import 'package:appmanager/features/screen/views/account/widget/account_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -18,7 +18,7 @@ class AppManager extends StatelessWidget {
           designSize: const Size(412,915),
           minTextAdapt: true,
           splitScreenMode: true,
-          builder: (BuildContext context, child) => MaterialApp(
+          builder: (BuildContext context, child) => GetMaterialApp(
             builder: (context, widget) {
               return MediaQuery(
               data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
