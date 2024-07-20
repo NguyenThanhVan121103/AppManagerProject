@@ -7,6 +7,7 @@ import 'package:appmanager/common_widgets/custom_shape/widgets/searchBar/searchB
 import 'package:appmanager/common_widgets/custom_shape/widgets/titleMenuButton/titleMenuWidget.dart';
 import 'package:appmanager/models/demoDB.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class homePageView extends StatefulWidget {
@@ -23,24 +24,24 @@ class _homePageViewState extends State<homePageView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const customHeadingContainer(
+            customHeadingContainer(
               child: Column(
 
                 children: [
                   //This is AppBar
                   HomePageAppBar(),
-                  SizedBox(height: 16,),
+                  SizedBox(height: 16.sp,),
                   // Search bar & Horizontal ListView
 
                   //Search bar
                   searchBarWidget(text: 'Search information',),
-                  SizedBox(height: 16,),
+                  SizedBox(height: 16.sp,),
 
                   // Title List view and button show all.
                   title_buttonWidget(title: 'Menu', showViewAllButton: false , colorTitle: Colors.white,),
 
                   // Horizontal Listview
-                  SizedBox(height: 30,),
+                  SizedBox(height: 30.sp,),
                   homeHorizontalListviewWidget()
                 ],
               ),

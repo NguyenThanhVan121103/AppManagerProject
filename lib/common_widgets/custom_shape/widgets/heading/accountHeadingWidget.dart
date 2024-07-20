@@ -1,6 +1,7 @@
 import 'package:appmanager/common_widgets/custom_shape/widgets/imageContainer/imageContainerWidget.dart';
 import 'package:appmanager/constants/constColor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -29,7 +30,7 @@ class accountHeadingWidget extends StatelessWidget {
               Get.to(onPressed);
             },
             child: Container(
-                width: 500,
+                width: 500.sp,
                 height: 250,
                 decoration: BoxDecoration(
                   color: Colors.white.withOpacity(0.1),
@@ -38,7 +39,7 @@ class accountHeadingWidget extends StatelessWidget {
                   alignment: Alignment.center,
                   children: [
                     //Avatar
-                    Positioned(top: 60,child: Container(
+                    Positioned(top: 60.sp,child: Container(
                         decoration: BoxDecoration(
                             color: MColor.third,
                             borderRadius: BorderRadius.circular(100)

@@ -1,13 +1,9 @@
 import 'package:appmanager/common_widgets/custom_shape/widgets/account/functionAccountWidget.dart';
-import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
 import 'package:appmanager/common_widgets/custom_shape/widgets/heading/accountHeadingWidget.dart';
-import 'package:appmanager/common_widgets/custom_shape/widgets/heading/customHeadingWidget.dart';
 import 'package:appmanager/common_widgets/custom_shape/widgets/horizontalListview/homeHorizontalListviewWidget.dart';
-import 'package:appmanager/common_widgets/custom_shape/widgets/imageContainer/imageContainerWidget.dart';
-import 'package:appmanager/constants/constColor.dart';
 import 'package:appmanager/features/screen/views/account/widget/editProfile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 class accountPageView extends StatelessWidget {
@@ -15,7 +11,7 @@ class accountPageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -23,8 +19,8 @@ class accountPageView extends StatelessWidget {
             accountHeadingWidget(imgURL: 'assets/images/maleAvatar.png', nameUser: 'Nguyễn Thành Văn', numberPhone: "+846542281515", onPressed: editProfilePageView(),),
 
             // My Activites
-            Text("My Activities", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-            SizedBox(height: 14,),
+            Text("My Activities", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp),),
+            SizedBox(height: 14.sp,),
 
             functionAccountWidget(icon: Iconsax.save_2, titleButton: "Saved post",),
             Divider(height: 0,),
@@ -37,14 +33,14 @@ class accountPageView extends StatelessWidget {
 
             //My Services
             Text("My Services", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
-            SizedBox(height: 14,),
+            SizedBox(height: 14.sp,),
 
             homeHorizontalListviewWidget(color: Colors.greenAccent, colorTitle: Colors.black,),
-            SizedBox(height: 14,),
+            SizedBox(height: 14.sp,),
 
             //Support information
-            Text("Support information", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20), ),
-            SizedBox(height: 14,),
+            Text("Support information", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.sp), ),
+            SizedBox(height: 14.sp,),
 
             functionAccountWidget(icon: Icons.wechat_outlined, titleButton: "Frequently asked questions",colorIcon: Colors.grey,),
             Divider(height: 0,),
@@ -53,7 +49,7 @@ class accountPageView extends StatelessWidget {
             functionAccountWidget(icon: Icons.support_agent, titleButton: "Support", colorIcon: Colors.grey, ),
             Divider(height: 0,),
 
-            Text("Version 0.1", style: TextStyle( fontSize: 10), ),
+            Text("Version 0.1", style: TextStyle( fontSize: 10.sp), ),
 
           ],
         ),

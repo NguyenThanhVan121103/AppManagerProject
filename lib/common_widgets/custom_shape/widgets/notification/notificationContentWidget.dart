@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class notificationContentWiget extends StatelessWidget {
   const notificationContentWiget({
@@ -16,8 +17,8 @@ class notificationContentWiget extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-          Text('${title} ${index}', style: TextStyle(fontWeight:FontWeight.bold, fontSize: 20), maxLines: 1,),
-          Text('${supTitle} ${index}', style: TextStyle(fontSize: 16), maxLines: 3,),
+          Text('${title} ${index}', style: TextStyle(fontWeight:FontWeight.bold, fontSize: 20.sp), maxLines: 1,),
+          Text('${supTitle} ${index}', style: TextStyle(fontSize: 16.sp), maxLines: 3,),
         ],
       ),
     );

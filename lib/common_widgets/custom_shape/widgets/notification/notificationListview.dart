@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 import 'iconDateTimeWidget.dart';
@@ -19,10 +20,10 @@ class notificationListWidget extends StatelessWidget {
     return ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         return Padding(
-          padding: const EdgeInsets.all(8),
+          padding: EdgeInsets.all(8.sp),
           child: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
-            height: 108,
+            padding: EdgeInsets.symmetric(horizontal: 15.sp),
+            height: 108.sp,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorListView,
@@ -30,7 +31,7 @@ class notificationListWidget extends StatelessWidget {
             child: Column(
               children: [
                 iconDaytimeWidget(icon: Iconsax.notification_bing, datetime: '3:12 PM, 7/18/2024', iconButton: Icons.adaptive.more),
-                SizedBox(height: 8,),
+                SizedBox(height: 8.sp),
                 Divider(height: 0,),
                 notificationContentWiget(title: "Notification", supTitle: "This is body notificaiton", index: index,)
               ],

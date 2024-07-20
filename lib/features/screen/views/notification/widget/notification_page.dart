@@ -2,6 +2,7 @@ import 'package:appmanager/common_widgets/custom_shape/widgets/notification/noti
 import 'package:appmanager/constants/constColor.dart';
 import 'package:flutter/material.dart';
 import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class notificationPageView extends StatefulWidget {
   const notificationPageView({super.key});
@@ -16,10 +17,10 @@ class _notificationPageViewState extends State<notificationPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MAppBar(
-        padding: EdgeInsets.only(bottom: 16),
+      appBar:MAppBar(
+        padding: EdgeInsets.only(bottom: 16.sp),
         backgroundColor: MColor.third,
-        title: Center(
+        title: const Center(
           child: Text(
             'Notification',
             style: TextStyle(

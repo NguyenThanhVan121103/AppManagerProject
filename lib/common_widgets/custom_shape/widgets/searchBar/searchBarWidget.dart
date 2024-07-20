@@ -1,5 +1,6 @@
 import 'package:appmanager/common_widgets/custom_shape/widgets/searchBar/searchPageWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -19,7 +20,7 @@ class searchBarWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Container(
-          width: 400,
+          width: 400.sp,
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
               color: Colors.white,
@@ -29,7 +30,7 @@ class searchBarWidget extends StatelessWidget {
           child: Row(
             children: [
               const Icon(Iconsax.search_normal, color: Colors.grey,),
-              const SizedBox(width: 15,),
+              SizedBox(width: 15.sp,),
               Text(text, style: const TextStyle(color: Colors.grey))
             ],
           ),

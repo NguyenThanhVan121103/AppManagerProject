@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'headingDialog.dart';
 
@@ -24,11 +25,11 @@ class iconDaytimeWidget extends StatelessWidget {
         Row(
           children: [
             Icon(icon, color: Colors.black,),
-            const SizedBox(width: 4,),
+            SizedBox(width: 4.sp,),
             Text(datetime),
           ],
         ),
-        const SizedBox(width: 10,),
+        SizedBox(width: 10.sp,),
         headingDialog(iconButton: iconButton, titleButton1: "Copy", titleButton2: "Share",titleButton3: "Delete",
           iconButton1: Iconsax.copy,iconButton2: Iconsax.share,iconButton3: Iconsax.trash,)
       ],

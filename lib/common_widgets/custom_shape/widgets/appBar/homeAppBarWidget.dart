@@ -1,6 +1,7 @@
 import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
 import 'package:appmanager/features/screen/views/setting/widget/setting_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -15,20 +16,20 @@ class HomePageAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return MAppBar(
       backgroundColor: Color(0xFF1565C0).withOpacity(0.1),
-      title: const Column(
+      title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             "Hello, Good day!!!",
             style: TextStyle(
-              fontSize: 15,
+              fontSize: 15.sp,
               color: MColor.third,
             ),
           ),
           Text(
             'Nguyen Thanh Van',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
               color: MColor.third,
             ),
