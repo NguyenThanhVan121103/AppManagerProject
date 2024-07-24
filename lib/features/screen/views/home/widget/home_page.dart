@@ -52,18 +52,18 @@ class _homePageViewState extends State<homePageView> {
             const SizedBox(height: 16,),
 
             // News 1  (News and title)
-            const title_buttonWidget(title: 'Title1', showViewAllButton: true , colorTitle: Colors.black,),
+            const title_buttonWidget(title: 'Topic 1', showViewAllButton: true , colorTitle: Colors.black,),
 
             const SizedBox(height: 16,),
 
-            newsHomePage(imgURLs: imgURLs, newsTitle: newsTitle, supTitle: suptitle,onPressed: onPressed,),
+            newsHomePage(imgURLs: overviewNews[0].imgUrls, newsTitle: overviewNews[0].titles, supTitle: overviewNews[0].supTitle,onPressed: overviewNews[0].onPressed,),
 
             // News 2  (News and title)
-            const title_buttonWidget(title: 'Title2', showViewAllButton: true , colorTitle: Colors.black,),
+            const title_buttonWidget(title: 'Topic 2', showViewAllButton: true , colorTitle: Colors.black,),
 
             const SizedBox(height: 16,),
 
-            newsHomePage(imgURLs: imgURLs, newsTitle: newsTitle, supTitle: suptitle,onPressed: onPressed,),
+            newsHomePage(imgURLs: overviewNews[1].imgUrls, newsTitle: overviewNews[1].titles, supTitle: overviewNews[1].supTitle,onPressed: overviewNews[1].onPressed,),
 
 
           ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
-import 'headingDialog.dart';
+import '../dialog/headingDialog.dart';
 
 class iconDaytimeWidget extends StatelessWidget {
   const iconDaytimeWidget({

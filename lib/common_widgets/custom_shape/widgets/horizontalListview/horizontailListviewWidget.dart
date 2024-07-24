@@ -1,26 +1,25 @@
+import 'package:appmanager/models/demoDB.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
-final List<String> titles = <String>['Schedule', 'Debt', 'Contracts'];
-final List<IconData> icons = <IconData>[Iconsax.calendar, Iconsax.money_send , Iconsax.barcode];
+
 
 class horizontalListViewWideget extends StatelessWidget {
   const horizontalListViewWideget({
     super.key,
     this.color = Colors.white,
     this.colorTitle = Colors.white,
-
-
   });
   final Color color,colorTitle;
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       height: 76,
       child: ListView.builder(
         shrinkWrap: true,
-        itemCount: titles?.length,
+        itemCount: dataMenu.length,
         scrollDirection: Axis.horizontal,
         itemBuilder:(_, index){
           return Padding(
@@ -35,10 +34,10 @@ class horizontalListViewWideget extends StatelessWidget {
                       color: color,
                       borderRadius: BorderRadius.circular(100)
                   ),
-                  child: Icon(icons[index]),
+                  child: Icon(dataMenu[index].icons),
                 ),
                 Text(
-                  '${titles[index]}',
+                  dataMenu[index].titles,
                   style: TextStyle(
                     color: colorTitle,
                   ),

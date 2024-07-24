@@ -1,6 +1,5 @@
 import 'package:appmanager/features/screen/views/news/widget/newsDemoPage.dart';
 import 'package:flutter/material.dart';
-
 import 'buttonNewsWidget.dart';
 
 class topicNewsWidget extends StatelessWidget {
@@ -10,13 +9,11 @@ class topicNewsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, index) {
-          return buttonNewsWidget(index: index, onTap: newsDemoPageView(),);
-        },
-        itemCount: 20,
-      ),
+    return ListView.builder(
+      itemBuilder: (BuildContext context, index) {
+        return buttonNewsWidget(index: index, onTap: newsDemoPageView(),);
+      },
+      itemCount: 20,
     );
   }
 }

@@ -13,7 +13,7 @@ class _editProfilePageViewState extends State<editProfilePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MAppBar(colorIcon: MColor.primary,showBackArrows: true,),
-        body: Container(color: Colors.lightBlueAccent, child: Center(child: const Text("Edit here")),));
+      appBar: const MAppBar(colorIcon: MColor.primary,showBackArrows: true,),
+        body: Container(color: Colors.lightBlueAccent, child: const Center(child: Text("Edit here")),));
   }
 }

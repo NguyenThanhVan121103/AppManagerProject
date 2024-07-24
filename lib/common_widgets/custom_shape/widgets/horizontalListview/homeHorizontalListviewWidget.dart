@@ -4,9 +4,7 @@ import 'package:iconsax/iconsax.dart';
 
 import 'horizontailListviewWidget.dart';
 
-final List<String> title = <String>['Schedule', 'Debt', 'Contracts'];
-final List<IconData> icon = <IconData>[Iconsax.calendar, Iconsax.money_tick, Iconsax.paperclip];
-final List<Function> onTaps = <Function>[];
+
 
 class homeHorizontalListviewWidget extends StatelessWidget {
   const homeHorizontalListviewWidget({

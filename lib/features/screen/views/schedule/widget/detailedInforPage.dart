@@ -7,7 +7,7 @@ class detailedInfor extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: MAppBar(
+      appBar: const MAppBar(
         showBackArrows: true,
         title: Text('Detailed information here'),
       ),

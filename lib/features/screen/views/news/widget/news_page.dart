@@ -2,10 +2,11 @@ import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidg
 import 'package:appmanager/common_widgets/custom_shape/widgets/news/topicNewsWidget.dart';
 import 'package:appmanager/common_widgets/custom_shape/widgets/searchBar/searchPageWidget.dart';
 import 'package:appmanager/constants/constColor.dart';
-import 'package:appmanager/models/demoDB.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+
+import '../../../../../common_widgets/custom_shape/widgets/refreshIndicatorWidget/widget/refreshIndicatorWidget.dart';
 
 class newsPageView extends StatefulWidget {
   const newsPageView({super.key});
@@ -24,6 +25,7 @@ class _newsPageViewState extends State<newsPageView> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        //Appbar
         appBar: MAppBar(
           backgroundColor: MColor.primary,
           title: Row(
@@ -39,33 +41,19 @@ class _newsPageViewState extends State<newsPageView> {
           title3: 'Topic 3',
           heightAppBar: 100,
         ),
+
+        //Tab barr & content
         body: TabBarView(
           children: [
-            RefreshIndicator(
-                key: _refreshIndicatorTopic1,
-                onRefresh: () async{
-                  return Future<void>.delayed(const Duration(seconds: 2));
-                },
-                child: const topicNewsWidget()
-            ),
-            RefreshIndicator(
-                key: _refreshIndicatorTopic2,
-                onRefresh: () async{
-                  return Future<void>.delayed(const Duration(seconds: 2));
-                },
-                child: const topicNewsWidget()
-            ),
-            RefreshIndicator(
-                key: _refreshIndicatorTopic3,
-                onRefresh: () async{
-                  return Future<void>.delayed(const Duration(seconds: 2));
-                },
-                child: const topicNewsWidget()
-            ),
+            refreshIndicatorWidget(refreshIndicator: _refreshIndicatorTopic1, child:const topicNewsWidget() ,),
+            refreshIndicatorWidget(refreshIndicator: _refreshIndicatorTopic2, child:const topicNewsWidget()),
+            refreshIndicatorWidget(refreshIndicator: _refreshIndicatorTopic3, child:const topicNewsWidget()),
           ],
       )
       ),
     );
   }
 }
+
+
 

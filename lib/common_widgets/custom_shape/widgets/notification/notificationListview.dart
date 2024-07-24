@@ -23,7 +23,7 @@ class notificationListWidget extends StatelessWidget {
           padding: EdgeInsets.all(8.sp),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 15.sp),
-            height: 108.sp,
+            height: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: colorListView,

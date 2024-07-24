@@ -1,4 +1,5 @@
 import 'package:appmanager/common_widgets/custom_shape/widgets/notification/notificationListview.dart';
+import 'package:appmanager/common_widgets/custom_shape/widgets/refreshIndicatorWidget/widget/refreshIndicatorWidget.dart';
 import 'package:appmanager/constants/constColor.dart';
 import 'package:flutter/material.dart';
 import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
@@ -32,15 +33,11 @@ class _notificationPageViewState extends State<notificationPageView> {
 
       // List notification
       body: Container(
-        color: MColor.primary,
-        child: RefreshIndicator(
-          key: _refreshIndicator,
-            onRefresh: () async{
-              return Future<void>.delayed(const Duration(seconds: 2));
-            },
-            child: const notificationListWidget(index: 16, colorListView: MColor.third,)),
+          color: MColor.primary,
+          child: refreshIndicatorWidget( refreshIndicator: _refreshIndicator, child:  notificationListWidget(index: 16, colorListView: MColor.third,),)
       ),
     );;
   }
 }
+
 

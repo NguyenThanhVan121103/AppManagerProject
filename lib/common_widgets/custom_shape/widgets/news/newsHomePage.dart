@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import '../../../../models/demoDB.dart';
 import 'newsShortWIdget.dart';
 
 
@@ -13,15 +14,15 @@ class newsHomePage extends StatelessWidget {
     this.onPressed,
   });
 
-  final List imgURLs, newsTitle, supTitle;
-  final List? onPressed;
+  final String imgURLs, newsTitle, supTitle;
+  final Widget? onPressed;
 
 
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
       items: [
-        for (int i = 0; i < imgURLs.length; i++) newsShort(imgURl: imgURLs[i], title: newsTitle[i], suptitle: supTitle[i], onPressed: onPressed?[i],),
+        for (int i = 0; i < overviewNews.length; i++) newsShort(imgURl: overviewNews[i].imgUrls, title: overviewNews[i].titles, suptitle: overviewNews[i].supTitle, onPressed: overviewNews[i].onPressed,),
       ], options: CarouselOptions(
         viewportFraction: 0.7
     ),
