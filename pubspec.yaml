@@ -31,7 +31,7 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_screenutil: ^5.3.1
-  image_picker: ^1.0.4
+  image_picker: ^1.0.8
   flutter_localizations:
     sdk: flutter
   intl: any
@@ -42,6 +42,11 @@ dependencies:
   iconsax: ^0.0.8
   get: ^4.6.6
   carousel_slider: ^4.2.1
+  spwidget:
+    path: ../spwidget/
+  dio: ^5.5.0+1
+  http: ^1.2.0
+  fl_chart: ^0.68.0
 
 
 dev_dependencies:
@@ -55,6 +60,7 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^2.0.0
+  date_picker_timeline:
 
 
 
@@ -97,6 +103,22 @@ flutter:
          - asset: assets/fonts/Araboto/Araboto Medium 400.ttf
          - asset: assets/fonts/Araboto/Araboto Normal 400.ttf
          - asset: assets/fonts/Araboto/Araboto Thin 400.ttf
+     - family: Roboto
+       fonts:
+         - asset: assets/fonts/Roboto/Roboto-Black.ttf
+         - asset: assets/fonts/Roboto/Roboto-BlackItalic.ttf
+         - asset: assets/fonts/Roboto/Roboto-Bold.ttf
+         - asset: assets/fonts/Roboto/Roboto-BoldItalic.ttf
+         - asset: assets/fonts/Roboto/Roboto-Italic.ttf
+         - asset: assets/fonts/Roboto/Roboto-Light.ttf
+         - asset: assets/fonts/Roboto/Roboto-LightItalic.ttf
+         - asset: assets/fonts/Roboto/Roboto-Medium.ttf
+         - asset: assets/fonts/Roboto/Roboto-MediumItalic.ttf
+         - asset: assets/fonts/Roboto/Roboto-Regular.ttf
+         - asset: assets/fonts/Roboto/Roboto-Thin.ttf
+         - asset: assets/fonts/Roboto/Roboto-ThinItalic.ttf
+
+
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

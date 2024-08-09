@@ -1,4 +1,4 @@
-import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
+import 'package:spwidget/common_widgets/widget/appbar/appBarWidget.dart';
 import 'package:appmanager/constants/constColor.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class _editProfilePageViewState extends State<editProfilePageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const MAppBar(colorIcon: MColor.primary,showBackArrows: true,),
+      appBar: const MAppBar(iconColor: MColor.primary,showBackArrows: true,),
         body: Container(color: Colors.lightBlueAccent, child: const Center(child: Text("Edit here")),));
   }
 }

@@ -1,4 +1,4 @@
-import 'package:appmanager/common_widgets/custom_shape/widgets/appBar/appBarWidget.dart';
+import 'package:spwidget/common_widgets/widget/appbar/appBarWidget.dart';
 import 'package:appmanager/constants/constColor.dart';
 import 'package:flutter/material.dart';
 
