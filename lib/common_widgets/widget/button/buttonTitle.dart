@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 
-class buttonTitle extends StatelessWidget {
-  const buttonTitle({
+class ButtonTitle extends StatelessWidget {
+  const ButtonTitle({
     super.key,
     required this.title,
-    this.titleButton = 'View all',
+    this.titleButton = "View all",
     this.showViewAllButton =true,
     this.colorTitle,
     this.onPressed,
@@ -24,7 +25,7 @@ class buttonTitle extends StatelessWidget {
           children: [
             Text(style: TextStyle(color: colorTitle, fontSize: 23, fontWeight: FontWeight.bold), title,),
             if(showViewAllButton) GestureDetector( onTap: () {},
-                child: Text(titleButton, style: TextStyle(color: colorTitle),))
+                child: Text(AppLocalizations.of(context)!.viewAll, style: TextStyle(color: colorTitle),))
           ],
         )
     );

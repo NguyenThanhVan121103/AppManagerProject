@@ -51,6 +51,7 @@ class _AddContractPageViewState extends State<AddContractPageView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: MAppBar(
         title: TextIcon(text: "Add Contract", fontWeight: FontWeight.bold, color: MColor.third,),
         action: [

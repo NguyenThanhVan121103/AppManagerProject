@@ -1,4 +1,5 @@
 import 'package:appmanager/constants/constColor.dart';
+import 'package:appmanager/database/news_DB/new_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,11 +20,11 @@ class HorizontalSlideImage extends StatelessWidget {
     return Column(
       children: [
         CarouselSlider(
-          items: const[
-            ImageContainerWidget(imgURl: "assets/images/1000x500.png",),
-            ImageContainerWidget(imgURl: "assets/images/1000x500.png",),
-            ImageContainerWidget(imgURl: "assets/images/1000x500.png",),
-            ImageContainerWidget(imgURl: "assets/images/1000x500.png",),
+          items: [
+            ImageContainerWidget(imgURl: newsData[0].imgUrls,),
+            ImageContainerWidget(imgURl: newsData[1].imgUrls,),
+            ImageContainerWidget(imgURl: newsData[2].imgUrls,),
+            ImageContainerWidget(imgURl: newsData[3].imgUrls,),
           ], options: CarouselOptions(
           viewportFraction: 0.8,
           onPageChanged: (index, _) => controller.updatePageIndicator(index),

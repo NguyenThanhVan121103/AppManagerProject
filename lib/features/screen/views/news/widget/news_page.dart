@@ -1,5 +1,6 @@
 import 'package:appmanager/common_widgets/widget/heading/persistentHeader.dart';
 import 'package:appmanager/common_widgets/widget/image/imageSlider.dart';
+import 'package:appmanager/constants/languageConstants.dart';
 import 'package:spwidget/common_widgets/widget/appbar/appBarWidget.dart';
 import 'package:appmanager/features/screen/views/search/widget/searchPage.dart';
 import 'package:appmanager/constants/constColor.dart';
@@ -10,6 +11,7 @@ import 'package:spwidget/common_widgets/widget/button/buttonBorder.dart';
 
 import '../../../../../common_widgets/widget/container/containerNew.dart';
 import '../../../../../common_widgets/widget/container/containerTitle.dart';
+import '../../../../../database/news_DB/newMenu_data.dart';
 
 
 
@@ -24,7 +26,6 @@ class _newsPageViewState extends State<newsPageView> {
   // Scroll
   final ScrollController _scrollController = ScrollController();
   int _currentIndex = 0;
-  late double screenHeight = 0;
 
 
 
@@ -32,32 +33,23 @@ class _newsPageViewState extends State<newsPageView> {
     double offset = _scrollController.offset;
     double screenHeight = MediaQuery.of(context).size.height;
     int newIndex = (offset / screenHeight).round();
-    if (newIndex != _currentIndex && newIndex == 2){
+    if(newIndex != _currentIndex){
       setState(() {
         _currentIndex = newIndex;
       });
-    } if(newIndex != _currentIndex && newIndex == 3){
-      setState(() {
-        _currentIndex = newIndex;
-        screenHeight = MediaQuery.of(context).size.height*2;
-      });
+      print("*****Newindex: $newIndex,currentIndex; $_currentIndex, offset: $offset, screenHeight: $screenHeight ");
 
-    } if(newIndex == _currentIndex && newIndex > 3){
-      setState(() {
-        _currentIndex = newIndex;
-        screenHeight = MediaQuery.of(context).size.height*2;
-      });
-    }else{
-      print("Newindex: $newIndex, offset: $offset, screenHeight: $screenHeight ");
+    }
+    else {
+      _currentIndex = newIndex;
+      print("Newindex: $newIndex,currentIndex; $_currentIndex, offset: $offset, screenHeight: $screenHeight ");
     }
   }
 
   @override
   void initState(){
     super.initState();
-    _scrollController.addListener(
-        _onScroll
-    );
+    _scrollController.addListener(_onScroll);
   }
 
   @override
@@ -78,7 +70,7 @@ class _newsPageViewState extends State<newsPageView> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('News', style: TextStyle(color: MColor.third, fontWeight: FontWeight.bold),),
+                Text(translation(context).news, style: TextStyle(color: MColor.third, fontWeight: FontWeight.bold),),
                 IconButton(onPressed: (){Get.to(const SearchPageView());}, icon: const Icon(Iconsax.search_normal, color: Colors.white,))
               ],
           ),
@@ -90,68 +82,71 @@ class _newsPageViewState extends State<newsPageView> {
           child: CustomScrollView(
             controller: _scrollController,
             slivers: <Widget>[
+
               const SliverToBoxAdapter(child:HorizontalSlideImage(backgroundColor: Colors.white,)),
               const SliverToBoxAdapter(child: SizedBox(height:  32,)),
-              SliverPersistentHeader(pinned: true, delegate:PersistentHeader(currentIndex:  _currentIndex, onTap: (){}), ),
+              SliverPersistentHeader(pinned: true, delegate:PersistentHeader(currentIndex:  _currentIndex, scrollController: _scrollController), ),
               const SliverToBoxAdapter(child: SizedBox(height: 32,),),
 
-              const ContainerTitle(title: 'Featured News'),
+
+              // Featured News
+              ContainerTitle(title: translation(context).featuredNews),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
-              const ContainerNew(),
+              const ContainerNew(itemCount: 6,),
               const SliverToBoxAdapter(child: SizedBox(height: 16,),),
-              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. See more ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
+              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. ${translation(context).seeMore} ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
 
               //Topic 1
               const SliverToBoxAdapter(child: SizedBox(height: 32,),),
 
-              const ContainerTitle(title: 'Topic 1'),
+              ContainerTitle(title: '${translation(context).topic} 1'),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
               const ContainerNew(),
 
               const SliverToBoxAdapter(child: SizedBox(height: 16,),),
-              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. See more ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
+              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. ${translation(context).seeMore} ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
 
               //Topic 2
               const SliverToBoxAdapter(child: SizedBox(height: 32,),),
 
-              const ContainerTitle(title: 'Topic 2'),
+              ContainerTitle(title: '${translation(context).topic} 2'),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
               const ContainerNew(),
               const SliverToBoxAdapter(child: SizedBox(height: 16,),),
-              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. See more ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
+              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. ${translation(context).seeMore} ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
 
               //Topic 3
               const SliverToBoxAdapter(child: SizedBox(height: 32,),),
 
-              const ContainerTitle(title: 'Topic 3'),
+              ContainerTitle(title: '${translation(context).topic} 3'),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
               const ContainerNew(),
               const SliverToBoxAdapter(child: SizedBox(height: 16,),),
-              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. See more ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
+              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. ${translation(context).seeMore} ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
 
               //Topic 4
               const SliverToBoxAdapter(child: SizedBox(height: 32,),),
 
-              const ContainerTitle(title: 'Topic 4' ),
+              ContainerTitle(title: '${translation(context).topic} 4' ),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
               const ContainerNew(),
               const SliverToBoxAdapter(child: SizedBox(height: 16,),),
-              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. See more ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
+              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. ${translation(context).seeMore} ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
 
               //Topic 4
               const SliverToBoxAdapter(child: SizedBox(height: 32,),),
 
-              const ContainerTitle(title: 'Topic 5' ),
+              ContainerTitle(title: '${translation(context).topic} 5' ),
 
               const SliverToBoxAdapter(child: SizedBox(height: 32)),
               const ContainerNew(),
               const SliverToBoxAdapter(child: SizedBox(height: 16,),),
-              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. See more ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
+              SliverToBoxAdapter(child: ButtonNormal(titleButton: ".. ${translation(context).seeMore} ..", colorButton: MColor.primary.withOpacity(0.1),colorBorder: MColor.primary.withOpacity(0.1), heightButton: 30,)),
             ],
           ),
         ),

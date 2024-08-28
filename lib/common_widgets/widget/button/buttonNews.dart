@@ -32,34 +32,37 @@ class ButtonNews extends StatelessWidget {
       onTap: () =>{
         Get.to(onPressed)
       },
-      child:Padding(
-        padding:  padding,
-        child: Column(
-          children: [
-            ImageContainerWidget(imgURl: imgURl,isNetworkImage: false, height: imageHeight.sp, width: imageWidth.sp,borderRadius: borderRadius.sp,),
-            Text(
-              title,
-              maxLines: 2,
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.sp,
-                  overflow: TextOverflow.ellipsis
+      child:SizedBox(
+        width: MediaQuery.of(context).size.width*0.6,
+        child: Padding(
+          padding:  padding,
+          child: Column(
+            children: [
+              ImageContainerWidget(imgURl: imgURl,isNetworkImage: false, height: imageHeight.sp, width: imageWidth.sp,borderRadius: borderRadius.sp,),
+              Text(
+                title,
+                maxLines: 1,
+                softWrap: true,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15.sp,
+                    overflow: TextOverflow.ellipsis
+                ),
               ),
-            ),
-            Text(
-              suptitle,
-              maxLines: 3,
-              style: TextStyle(
-                  fontSize: 12.sp,
-                  fontWeight: FontWeight.normal,
-                  overflow: TextOverflow.ellipsis
-              ),
-            )
-          ],
+              Text(
+                suptitle,
+                maxLines: 2,
+                style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.normal,
+                    overflow: TextOverflow.ellipsis
+                ),
+              )
+            ],
+          ),
         ),
       )
      );
   }
 }
 
-// OverviewNewsWidget(imgURl: imgURl, isNetworkImage: isNetworkImage, title: title, suptitle: suptitle,,

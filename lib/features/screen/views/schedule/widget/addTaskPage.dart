@@ -38,8 +38,6 @@ class _AddTaskState extends State<AddTask> {
     controllerTask.collectionVoulumeController.addListener(() {
       _isButtonActive();
     });
-
-
   }
 
   @override

@@ -31,7 +31,7 @@ class NewsHomePage extends StatelessWidget {
         controller: controller,
         scrollDirection: scrollDirection,
         itemBuilder: (BuildContext context, int index) {
-          return ButtonNews(imgURl: newsData[index].imgUrls, title: newsData[index].titles, suptitle: newsData[index].supTitle, onPressed: newsData[index].onPressed,padding: const EdgeInsets.symmetric(horizontal: 0));
+          return ButtonNews(imgURl: newsData[index].imgUrls, title: newsData[index].titles, suptitle: newsData[index].supTitle, onPressed: newsData[index].onPressed,padding: const EdgeInsets.symmetric(horizontal: 8));
         },
         itemCount: newsData.length,
       ),

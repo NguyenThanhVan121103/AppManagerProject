@@ -1,6 +1,8 @@
 import 'package:appmanager/common_widgets/widget/container/cotainerTasks.dart';
+import 'package:appmanager/database/contract_DB/imgContract_data.dart';
 import 'package:appmanager/features/screen/views/contract/widget/addContractPage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:spwidget/common_widgets/widget/appbar/appBarWidget.dart';
 import 'package:spwidget/common_widgets/widget/button/buttonBorder.dart';
@@ -60,50 +62,34 @@ class _ContractPageViewState extends State<ContractPageView> {
             ),
 
             // Contract List
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index){
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => AddContractPageView()));
-
-                        },
-                        child: Container(
-                          height: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            border: Border.all(
-                              color: Colors.grey,
-                              width: 1.0
-                            ),
-                            color: MColor.primary,
-                          ),
-                          child: const Row(
-                            children: [
-                              ImageContainerWidget(imgURl: "assets/images/500x500.png", width: 150,height: 150, borderRadius: 0,),
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    TextIcon(icon: Iconsax.calendar,text: ": 8/2/2024", color: Colors.white,),
-                                    TextIcon(text: "Số: 156-786/HDTX", fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white,),
-                                    TextIcon(text: "Bên thuê: Công ty một thành viên Nguyen Thanh Van", maxline: 2,overflow: TextOverflow.ellipsis, color: Colors.white,)
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height*0.7,
+                child: MasonryGridView.builder(
+                    gridDelegate: const SliverSimpleGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                  itemBuilder: (context, index) => Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          top: BorderSide(color: Colors.black),
+                          bottom: BorderSide(color: Colors.black),
+                          left: BorderSide(color: Colors.black),
+                          right: BorderSide(color: Colors.black),
                         ),
+                        borderRadius: BorderRadius.circular(12)
                       ),
-                    );
-                  },
-                  childCount: 4
+                      child: Column(
+                        children: [
+                          Image.asset(imgContractData[index].srcImg),
+                          Text(imgContractData[index].codeContract)
+                        ],
+                      ),
+                    ),
+                  ),
+                  itemCount: imgContractData.length,
+                ),
               ),
-
             )
           ],
         ),

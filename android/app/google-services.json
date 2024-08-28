@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "328388873431",
+    "project_id": "pushnotification-c5822",
+    "storage_bucket": "pushnotification-c5822.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:328388873431:android:83a05d6925ea28b0d67492",
+        "android_client_info": {
+          "package_name": "com.mtachau.appmanager"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNSuIFP0JhoCXx1AYqnUuFpIlmmDliKXA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

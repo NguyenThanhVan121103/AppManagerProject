@@ -47,10 +47,28 @@ dependencies:
   dio: ^5.5.0+1
   http: ^1.2.0
   fl_chart: ^0.68.0
+  flutter_staggered_grid_view: ^0.7.0
+  shared_preferences: ^2.2.3
 
+  firebase_messaging: ^14.7.19
+  firebase_core: ^2.27.0
+  flutter_local_notifications: ^17.2.2
+  cloud_firestore: ^4.15.8
+  googleapis: ^13.1.0
+  googleapis_auth: ^1.6.0
+  firebase_auth: ^4.17.8
+  badges: ^3.1.2
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  image_path: "assets/logo/logoZalo.png"
+  android: "launcher_icon"
+  ios: true
+  flutter_test:
+    sdk: flutter
 
 dev_dependencies:
-  flutter_test:
+  integration_test:
     sdk: flutter
 
 
@@ -77,6 +95,10 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/logo/
+    - assets/logo/logoZalo.png
+    - assets/pushnotification-c5822-firebase-adminsdk-78oly-c39bc2a432.json
+    - assets/pushnotification-c5822-ae3e52b2f1db.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:

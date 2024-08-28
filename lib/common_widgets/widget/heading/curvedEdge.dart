@@ -15,24 +15,21 @@ class curvedEdgeWidget extends StatelessWidget {
   final double heightHeading;
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-        clipper: customEdgeContainer(),
-        child: Container(
-          padding: const EdgeInsets.all(0),
-          decoration: const BoxDecoration(
-            color: MColor.primary,
-          ),
-          child: SizedBox(
-            height: heightHeading,
-            child: Stack(
-              children: [
-                Positioned(left: 250, top: -150,child: CircularContainer(backgroundColor: MColor.third.withOpacity(0.1),)),
-                Positioned(left: 250, top: 150,child: CircularContainer(backgroundColor: MColor.third.withOpacity(0.1),)),
-                child,
-              ],
-            ),
-          ),
+    return Container(
+      padding: const EdgeInsets.all(0),
+      decoration: const BoxDecoration(
+        color: MColor.primary,
+      ),
+      child: SizedBox(
+        height: heightHeading,
+        child: Stack(
+          children: [
+            Positioned(left: 250, top: -150,child: CircularContainer(backgroundColor: MColor.third.withOpacity(0.1),)),
+            Positioned(left: 250, top: 150,child: CircularContainer(backgroundColor: MColor.third.withOpacity(0.1),)),
+            child,
+          ],
         ),
+      ),
     );
   }
 }

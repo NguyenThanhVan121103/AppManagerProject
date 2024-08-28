@@ -1,204 +1,193 @@
+import 'package:appmanager/common_widgets/widget/button/buttonDialogNotification.dart';
+import 'package:appmanager/common_widgets/widget/container/containerDrag.dart';
+import 'package:appmanager/common_widgets/widget/container/containerNotification.dart';
 import 'package:appmanager/constants/constColor.dart';
-import 'package:appmanager/database/notification_DB/notification_DB.dart';
-import 'package:appmanager/features/screen/views/search/widget/searchPage.dart';
+import 'package:appmanager/features/screen/views/notification/widget/addNotification_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:spwidget/common_widgets/widget/appbar/appBarWidget.dart';
-import 'package:spwidget/common_widgets/refresh/refreshIndicatorWidget.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../../../common_widgets/widget/button/buttonDialogNotification.dart';
-import '../../../../../common_widgets/widget/container/containerDrag.dart';
-
-
-class notificationPageView extends StatefulWidget {
-  const notificationPageView({
-    super.key,
-  });
-
+class NotificationPageView extends StatefulWidget {
+  const NotificationPageView({super.key});
 
   @override
-  State<notificationPageView> createState() => _notificationPageViewState();
+  State<NotificationPageView> createState() => _NotificationPageViewState();
 }
 
-class _notificationPageViewState extends State<notificationPageView> {
-  final GlobalKey<RefreshIndicatorState> _refreshIndicator = GlobalKey<RefreshIndicatorState>();
-  late List<bool> pressedAttentions = notificationData.map((e) => false).toList();
-  late bool stateAppbar;
-  late int selectedNumber;
+class _NotificationPageViewState extends State<NotificationPageView> {
+  bool isLoading = false;
 
   @override
-  void initState() {
+  void initState(){
     super.initState();
-    stateAppbar = true;
-    selectedNumber = 0;
+
   }
+
+  Map<String, List<QueryDocumentSnapshot>> categorizeNotificationByDate(List<QueryDocumentSnapshot> docs){
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    final yesterday = today.subtract(Duration(days: 1));
+    final sevenDaysAgo = today.subtract(Duration(days: 3));
+    Map<String, List<QueryDocumentSnapshot>> categorizedData = {
+      "Today": [],
+      "Yesterday": [],
+      "Older": [],
+    };
+
+    for (var doc in docs) {
+      final timestamp = (doc['timeStamp'] as Timestamp).toDate();
+      if (timestamp.compareTo(today) == 0) {
+        categorizedData["Today"]?.add(doc);
+      } else if (timestamp.compareTo(yesterday) == 0) {
+        categorizedData["Yesterday"]?.add(doc);
+      } else if (timestamp.compareTo(sevenDaysAgo) == 0) {
+        categorizedData["7DaysAgo"]?.add(doc);
+      } else {
+        categorizedData["Older"]?.add(doc);
+      }
+    }
+    return categorizedData;
+  }
+
+  Future<void> deleteData(String idData) async{
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      final querySnapshot = await FirebaseFirestore.instance
+          .collection("NotificationData")
+          .where('id', isEqualTo: idData)
+          .get();
+      for (var doc in querySnapshot.docs){
+        await doc.reference.delete();
+      }
+    } catch(e){
+      print("We have an error: $e");
+    }finally{
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: (stateAppbar == true || selectedNumber == 0) ? MAppBar(
-        backgroundColor: MColor.third,
-        title: const Center(
-            child: Text(
-              'Notifications',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            )
-        ),
+      appBar: MAppBar(
+        showBackArrows: true,
+        iconColor: Colors.white,
+        title: Text('Notification', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
+        backgroundColor: MColor.primary,
         action: [
           IconButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPageView()));
-          }, icon: Icon(Iconsax.search_normal))
-        ],
-      ) : MAppBar(
-        backgroundColor: MColor.third,
-        lendingIcon: Iconsax.arrow_left,
-        backOnTap: (){
-          setState(() {
-            stateAppbar = true;
-            pressedAttentions = notificationData.map((e) => false).toList();
-            selectedNumber = 0;
-          });
-
-        },
-        title: Center(
-            child: Text(
-              'Notifications (${selectedNumber})',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            )
-        ),
-        action: [
-          Row(
-            children: [
-              IconButton(onPressed: (){}, icon: Icon(Iconsax.save_2)),
-              IconButton(onPressed: (){}, icon: Icon(Iconsax.trash)),
-              IconButton(onPressed: (){}, icon: Icon(Iconsax.share)),
-
-            ],
-          )
+            Navigator.push(context, MaterialPageRoute(builder: (context) => AddNotificationPageView()));
+          }, icon: Icon(Iconsax.add, color: Colors.white,))
         ],
       ),
-
-      // List notification
-      body: Container(
-          color: MColor.primary.withOpacity(0.9),
-          child: RefreshIndicatorWidget(
-            refreshIndicator: _refreshIndicator,
-            child:(pressedAttentions.length != 0)
-                ? ListView.builder(  // If Database is not empty
-              itemBuilder: (BuildContext context, int index) {
-                final pressAttention = pressedAttentions[index];
-                  return Dismissible(
-                    onDismissed: (direction) {
-                      setState(() {
-                        // If deletion of item is attention
-                        (selectedNumber == 0)
-                            ? (stateAppbar= true)
-                            : (pressedAttentions[index] == true)
-                            ? (selectedNumber -=1 , (selectedNumber == 0)
-                            ? (stateAppbar = true)
-                            : stateAppbar )
-                            : (selectedNumber)  ;
-
-                        // Delete item
-                        notificationData.removeAt(index);
-
-                        // sort true false in the list;
-                        if(pressedAttentions[index] == false) {
-                          for(int j = index; j < pressedAttentions.length; j++){
-                            if(pressedAttentions[j] == true) {
-                              pressedAttentions[j - 1] = true;
-                              pressedAttentions[j] = false;
-                            }
-                          }
-                        } else{
-                          pressedAttentions[index] = false;
-                          for(int j = index; j < pressedAttentions.length; j++){
-                            if(pressedAttentions[j] == true) {
-                              pressedAttentions[j - 1] = true;
-                              pressedAttentions[j] = false;
-                            }
-                          }
-                        }
-                      });
-                    },
-
-                    key: ValueKey<String>(notificationData[index].title),
-
-                    // Drag Left
-                    background: ContainerDrag(colorContainer: Colors.red.withOpacity(0.6),aligment: Alignment.centerLeft, padding: EdgeInsets.symmetric(horizontal: 25.sp), iconFunction: Iconsax.trash),
-
-                    // Drag Right
-                    secondaryBackground: ContainerDrag(colorContainer: Colors.red.withOpacity(0.6),aligment: Alignment.centerRight, padding: EdgeInsets.symmetric(horizontal: 25.sp), iconFunction: Iconsax.trash),
-
-                    // content
-                    child: Padding(
-                      padding: EdgeInsets.all(8.sp),
-                      child: GestureDetector(
-                        onLongPressStart: (_) => setState(() {
-                          pressedAttentions[index] = !pressAttention;
-                          stateAppbar = false;
-                          (pressedAttentions[index] == true) ? selectedNumber += 1
-                              : (selectedNumber == 0) ? (selectedNumber, stateAppbar = true, pressedAttentions = notificationData.map((e) => false).toList()) : (selectedNumber -=1, stateAppbar = false);
-                        }),
-
-                        //Icon + title + suptitle + color
-                        child: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 15.sp),
-                          height: 190,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: (pressAttention) ? Colors.grey : Colors.white,
-                          ),
-                          child: Column(
-                            children: [
-                              iconDaytimeWidget(icon: Iconsax.notification_bing, datetime: notificationData[index].time, iconButton: (pressAttention && selectedNumber != 0) ?  Icons.check : Icons.person),
-                              SizedBox(height: 8.sp),
-                              Divider(height: 0,),
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text(notificationData[index].title, style: TextStyle(fontWeight:FontWeight.bold, fontSize: 20.sp), maxLines: 1, overflow: TextOverflow.ellipsis,),
-                                    Text(notificationData[index].suptitle, style: TextStyle(fontSize: 16.sp), maxLines: 3, overflow: TextOverflow.ellipsis),
-                                  ],
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-              },
-              itemCount: notificationData.length,
-            )
-
-            // Elif (Database is empty)
-                : ListView.builder(
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
+      body: isLoading
+      ? Container(
+        alignment: Alignment.center,
+        color: MColor.primary,
+        child: const CircularProgressIndicator(color: Colors.white,),
+      ): Container(
+        color: MColor.primary,
+        child: StreamBuilder<QuerySnapshot>(
+          stream: FirebaseFirestore.instance
+          .collection("NotificationData")
+          .snapshots(),
+          builder: (context, snapshot){
+            if(snapshot.connectionState == ConnectionState.waiting){
+              return const Center(child: CircularProgressIndicator(color: Colors.white,));
+            }
+            else if(snapshot.hasError){
+              return Center(
+                  child: Text(
+                      "Something went wrong: ${snapshot.error}"));
+            }
+            else if(!snapshot.hasData ||
+            snapshot.data!.docs
+              .isEmpty){
+              return Center(
+                child: Padding(
                   padding: EdgeInsets.only(top: 200.sp),
                   child: const Column(
                     children: [
-                      Icon(Iconsax.notification, size: 160, color: Colors.white,),
-                      Text("No Notification Yet", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),),
-                      Text("When you get notification, they'll show up hree.", style: TextStyle(color: Colors.white),)
+                      Icon(
+                        Iconsax.notification,
+                        size: 160,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "No Notification Yet",
+                        style: TextStyle(
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Text(
+                        "When you get notification, they'll show up here.",
+                        style: TextStyle(color: Colors.white),
+                      )
                     ],
                   ),
-                );
-              },
-              itemCount: 1,
-            ),
-          )
-      ),
+                ),
+              );
+            } else{
+              final categorizedData = categorizeNotificationByDate(snapshot.data!.docs);
+              return ListView(
+                children: [
+                  if(categorizedData["Today"]?.isNotEmpty ?? false)...[
+                    const Text("Today",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white)),
+                    Column(
+                      children: categorizedData["Today"]!.reversed
+                          .map((doc) => BuildNotificationItem(doc: doc, onDismissed: (direction){
+                        deleteData(doc["id"]);
+                      },))                      .toList(),
+                    ),
+                  ],
+                  if(categorizedData["Yesterday"]?.isNotEmpty ?? false)...[
+                    const Text("Yesterday",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white)),
+                    Column(
+                      children: categorizedData["Yesterday"]!.reversed
+                          .map((doc) => BuildNotificationItem(doc: doc, onDismissed: (direction){
+                        deleteData(doc["id"]);
+                      },))                          .toList(),
+                    ),
+                  ],
+                  if(categorizedData["Older"]?.isNotEmpty ?? false)...[
+                    const Text("7 days ago",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                            color: Colors.white)),
+                    Column(
+                      children: categorizedData["Older"]!.reversed
+                          .map((doc) => BuildNotificationItem(doc: doc, onDismissed: (direction){
+                            deleteData(doc["id"]);
+                      },))
+                          .toList(),
+                    ),
+                  ],
+                ],
+              );
+            };
+          },
+        ),
+      )
     );
   }
 }
-
-
-
 
