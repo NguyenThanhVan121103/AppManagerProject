@@ -97,8 +97,6 @@ flutter:
     - assets/images/
     - assets/logo/
     - assets/logo/logoZalo.png
-    - assets/pushnotification-c5822-firebase-adminsdk-78oly-c39bc2a432.json
-    - assets/pushnotification-c5822-ae3e52b2f1db.json
 
   # To add assets to your application, add an assets section, like this:
   # assets:
