@@ -41,3 +41,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+lib/features/screen/views/notification/widget/addNotification_page.dart
+lib/features/screen/views/notification/widget/addNotification_page.txt

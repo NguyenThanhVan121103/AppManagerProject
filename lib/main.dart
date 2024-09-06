@@ -5,7 +5,7 @@ import 'package:appmanager/demo/demoAddData.dart';
 import 'package:appmanager/demo/demoFirebaseApi.dart';
 import 'package:appmanager/demo/demoPushNotification.dart';
 import 'package:appmanager/features/authentication/views/signUpPage.dart';
-import 'package:appmanager/features/screen/views/notification/widget/addNotification_page.dart';
+import 'package:appmanager/features/screen/views/notification/widget/addNotification_page.txt';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';

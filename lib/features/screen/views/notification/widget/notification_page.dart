@@ -1,7 +1,7 @@
 import 'package:appmanager/common_widgets/widget/container/containerNotification.dart';
 import 'package:appmanager/constants/constColor.dart';
 import 'package:appmanager/controller/notification/notificationController.dart';
-import 'package:appmanager/features/screen/views/notification/widget/addNotification_page.dart';
+import 'package:appmanager/features/screen/views/notification/widget/addNotification_page.txt';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
