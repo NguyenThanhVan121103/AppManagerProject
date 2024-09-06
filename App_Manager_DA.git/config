@@ -1,0 +1,9 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = true
+	symlinks = false
+	ignorecase = true
+[remote "origin"]
+	url = https://github.com/NguyenThanhVan121103/App_Manager_DA.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
