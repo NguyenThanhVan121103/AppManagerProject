@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:appmanager/classes/selectedLanguage/localSelectedLanguage.dart';
+import 'package:appmanager/common_widgets/widget/navigationbar/navigationMenu.dart';
 import 'package:appmanager/constants/constColor.dart';
 import 'package:appmanager/constants/languageConstants.dart';
 import 'package:appmanager/controller/loading/loadingController.dart';
@@ -25,11 +27,16 @@ class LanguagePageView extends StatefulWidget {
 class _LanguagePageViewState extends State<LanguagePageView> with TickerProviderStateMixin {
   late List<bool> isSelected = languageData.map((e) => false).toList();
   final LoadingController loadingController = Get.put(LoadingController());
+  int? index = LocalSelectedLanguage.getSetlectedLanguage();
 
   @override
   void initState() {
     super.initState();
-    _isSelectedLanguage();
+    if (index != null) {
+      _isSelected(index!);
+    } else{
+      LocalSelectedLanguage.setSetlectedLanguage(1);
+    }
   }
 
   @override
@@ -46,24 +53,27 @@ class _LanguagePageViewState extends State<LanguagePageView> with TickerProvider
         child: ListView.separated(
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: () {
+                onTap: () {
+                  _isSelected(index);
+                  _showBottomSheet(index);
+                  // _isSelectedLanguage(index);
 
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    children: [
-                      Divider(height: 0),
-                      SizedBox(height: 8),
-                      ButtonLanguage(title: languageData[index].name, isSelected: isSelected[index]),
-                      SizedBox(height: 8),
-                      Divider(height: 0),
-                    ],
+                  },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        Divider(height: 0),
+                        SizedBox(height: 8),
+                        ButtonLanguage(title: languageData[index].name, isSelected: isSelected[index]),
+                        SizedBox(height: 8),
+                        Divider(height: 0),
+                      ],
+                    ),
                   ),
                 ),
-              ),
             );
           },
           separatorBuilder: (BuildContext context, int index) => Divider(height: 0),
@@ -73,7 +83,8 @@ class _LanguagePageViewState extends State<LanguagePageView> with TickerProvider
     );
   }
 
-  _isSelected(int index) {
+  _isSelected(int index) async{
+    await LocalSelectedLanguage.setSetlectedLanguage(index);
     setState(() {
       isSelected = languageData.map((e) => false).toList();
       isSelected[index] = true;
@@ -82,73 +93,41 @@ class _LanguagePageViewState extends State<LanguagePageView> with TickerProvider
 
   _isLanguage(int index) async {
     languageModel language = languageData[index];
-
-    // Bắt đầu loading với thời gian 5 giây
-    _showBottomSheet();
-    print(loadingController.isLoading);
-    loadingController.isLoading.listen((isLoading) {
-      if (!isLoading) {
-        Navigator.of(context).pop(); // Đóng BottomSheet khi isLoading là false
-      }
-    });
-    print(loadingController.isLoading);
-
     if (language != null) {
       Locale _locale = await setLocale(language.languageCode);
       AppManager.setLocale(context, _locale);
     }
   }
 
-  _isSelectedLanguage() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? savedLanguageCode = prefs.getString('languageCode');
 
-    if (savedLanguageCode != null) {
-      int index = languageData.indexWhere((lang) => lang.languageCode == savedLanguageCode);
-      if (index != -1) {
-        setState(() {
-          isSelected = languageData.map((e) => false).toList();
-          isSelected[index] = true;
-        });
-        _isLanguage(index);
-      }
-    } else {
-      isSelected[0] = true;
-      _isLanguage(0);
-    }
-  }
-  Future<void> LoadingLanguage(int index)async {
-    loadingController.startLoading();
-    try{
-      _isSelectedLanguage();
-    }catch (e){
-      _isLanguage(index);
-      _isSelected(index);
-      print(e);
-    }finally{
-      loadingController.stopLoading();
-    }
-
-  }
-
-  void _showBottomSheet() {
-    Get.bottomSheet(
-      Obx(() => Container(
-        height: 150.h,
-        padding: EdgeInsets.all(16.0),
-        color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Changing Language...',
-              style: TextStyle(fontSize: 16.sp),
-            ),
-            SizedBox(height: 16),
-            LinearProgressIndicator(color: Colors.green,)
-          ],
+  void _showBottomSheet(index) async{
+    index = LocalSelectedLanguage.getSetlectedLanguage();
+      Get.bottomSheet(
+        Container(
+          height: 150.h,
+          padding: EdgeInsets.all(16.0),
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Changing Language...',
+                style: TextStyle(fontSize: 16.sp),
+              ),
+              SizedBox(height: 16),
+              LinearProgressIndicator(color: Colors.green,)
+            ],
+          ),
         ),
-      )),
-    );
-  }
+      );
+      // Tự động đóng BottomSheet sau 5 giây
+      Future.delayed(Duration(seconds: 5), () {
+        if (Get.isBottomSheetOpen ?? false) {
+          _isLanguage(index);
+          Navigator.push(context, MaterialPageRoute(builder: (context) => navigationMenu()));
+        }
+      });
+    }
 }
+
+

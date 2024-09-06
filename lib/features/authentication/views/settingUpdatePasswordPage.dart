@@ -158,6 +158,8 @@ class _SettingUpdatePasswordPageViewState extends State<SettingUpdatePasswordPag
         setState(() {
           isFilledOut[isSelected] = false;
           _isSelected(isSelected);
+          code = code.substring(0, isSelected);
+          print("This is code: $code" );
         });
       }
       if(isSelected != 0){
@@ -166,16 +168,19 @@ class _SettingUpdatePasswordPageViewState extends State<SettingUpdatePasswordPag
             isSelected -= 1;
             isFilledOut[isSelected] = false;
             _isSelected(isSelected);
+            code = code.substring(0, isSelected);
+            print("This is code: $code" );
           });
       }
     }
-
     if(isSelected == selectedIndex.length){
       print("join here");
       print("if ==");
       setState(() {
         isFilledOut[isSelected - 1] = false;
         _isSelected(isSelected - 1);
+        code = code.substring(0, isSelected);
+        print("This is code: $code" );
       });
     }
   }

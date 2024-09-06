@@ -26,6 +26,7 @@ class HorizontalSlideImage extends StatelessWidget {
             ImageContainerWidget(imgURl: newsData[2].imgUrls,),
             ImageContainerWidget(imgURl: newsData[3].imgUrls,),
           ], options: CarouselOptions(
+          autoPlay: true,
           viewportFraction: 0.8,
           onPageChanged: (index, _) => controller.updatePageIndicator(index),
         ),

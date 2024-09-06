@@ -1,3 +1,5 @@
+import 'package:appmanager/classes/selectedAccountLink/localSelectedAccountLink.dart';
+import 'package:appmanager/classes/selectedLanguage/localSelectedLanguage.dart';
 import 'package:appmanager/constants/languageConstants.dart';
 import 'package:appmanager/demo/demoAddData.dart';
 import 'package:appmanager/demo/demoFirebaseApi.dart';
@@ -13,12 +15,20 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
+import 'classes/countNotification/countNotification.dart';
+import 'controller/notification/notificationController.dart';
+
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async{
   print("-------------------------------- Background message ---------------");
   print("Handling a background message ${message.messageId}");
+
+  await Firebase.initializeApp();
+  // Cập nhật giá trị countNoti khi nhận được thông báo
+  NotificationController controller = Get.put(NotificationController());
+  controller.addCountNoti();
 }
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +40,10 @@ Future<void> main() async{
     DeviceOrientation.portraitDown,
     DeviceOrientation.portraitUp,
   ]);
+  await LocalSelectedLanguage.init();
+  await LocalCountNotification.init();
+  await LocalSelectedAccountLink.init();
+
   FirebaseMessaging.onMessage.listen((RemoteMessage remoteMessage) {
     print("------------------ Message is------------------");
     print("Message Data: ${remoteMessage.data}");
