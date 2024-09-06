@@ -87,11 +87,11 @@ class _NotificationPageViewState extends State<NotificationPageView> {
           iconColor: Colors.white,
           title: Text('Notification', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),),
           backgroundColor: (selectionList.every((element) => element == false)) ? MColor.primary : Colors.white,
-          action: [
-            IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => AddNotificationPageView()));
-            }, icon: Icon(Iconsax.add, color: Colors.white,))
-          ],
+          // action: [
+          //   IconButton(onPressed: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => AddNotificationPageView()));
+          //   }, icon: Icon(Iconsax.add, color: Colors.white,))
+          // ],
         ),
         body: isLoading
             ? Container(
